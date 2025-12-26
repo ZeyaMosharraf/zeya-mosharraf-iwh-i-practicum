@@ -8,11 +8,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ✅ PUG SETUP (MANDATORY)
 app.set("view engine", "pug");
 app.set("views", "./views");
 
-// hubspot client
 const hubspot = axios.create({
   baseURL: "https://api.hubapi.com",
   headers: {
@@ -22,9 +20,6 @@ const hubspot = axios.create({
 });
 
 
-// ==============================
-// 🏠 HOME → LIST GAMES (NOT JSON)
-// ==============================
 app.get("/", async (req, res) => {
   try {
     const resp = await hubspot.get(
@@ -39,9 +34,6 @@ app.get("/", async (req, res) => {
 });
 
 
-// ==============================
-// 📝 FORM PAGE
-// ==============================
 app.get("/update-cobj", (req, res) => {
   res.render("updates", {
     title: "Update Custom Object Form | Integrating With HubSpot I Practicum"
@@ -49,9 +41,6 @@ app.get("/update-cobj", (req, res) => {
 });
 
 
-// ==============================
-// ➕ CREATE GAME (POST)
-// ==============================
 app.post("/update-cobj", async (req, res) => {
   const { name, publisher, price } = req.body;
 
@@ -67,10 +56,6 @@ app.post("/update-cobj", async (req, res) => {
   }
 });
 
-
-// ==============================
-// 🚀 START SERVER
-// ==============================
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
