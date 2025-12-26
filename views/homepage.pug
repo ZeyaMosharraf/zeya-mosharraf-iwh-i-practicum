@@ -1,0 +1,16 @@
+html
+  head
+    title Games
+  body
+    h1 Games List
+    a(href="/update-cobj") Add to this table
+    table(border="1")
+      tr
+        th Name
+        th Publisher
+        th Price
+      each game in games
+        tr
+          td= game.properties.name
+          td= game.properties.publisher
+          td= game.properties.price
