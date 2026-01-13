@@ -7,7 +7,7 @@ const app = express();
 // ===== CONFIG =====
 const PORT = 3000;
 const HUBSPOT_BASE_URL = 'https://api.hubspot.com/crm/v3';
-const CUSTOM_OBJECT_ID = '2-54742785'; // Games Custom Object ID
+const CUSTOM_OBJECT_ID = '2-54742785';
 const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKEN;
 
 // ===== APP SETUP =====
@@ -28,7 +28,7 @@ const hubspotClient = axios.create({
 // ===== ROUTE 1: HOMEPAGE (GET) =====
 app.get('/', async (req, res) => {
   try {
-    // Requesting specifically the properties we need for our cards
+  
     const response = await hubspotClient.get(
       `/objects/${CUSTOM_OBJECT_ID}`,
       { params: { properties: 'name,publisher,price' } }
@@ -75,7 +75,7 @@ app.post('/update-cobj', async (req, res) => {
       properties: {
         name: name,
         publisher: publisher,
-        price: price.toString(), // HubSpot often prefers numeric properties as strings in POST
+        price: price.toString(), 
       },
     });
 
