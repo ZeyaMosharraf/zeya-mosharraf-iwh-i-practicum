@@ -1,0 +1,59 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet")
+    link(rel="stylesheet" href="/css/style.css")
+
+  body
+    .container
+      header.header
+        h1 Add New Game
+        a.btn.btn-ghost(href="/") Back to List
+
+      main.main-content
+        if error
+          .alert.alert-error= error
+
+        form.form(method="POST" action="/update-cobj" novalidate)
+          //- Game Name Field
+          .form-group
+            label(for="name") Game Name
+            input#name(
+              type="text"
+              name="name"
+              required
+              value=(old && old.name ? old.name : '')
+              placeholder="e.g. Elden Ring"
+            )
+
+          //- Publisher Field
+          .form-group
+            label(for="publisher") Publisher
+            input#publisher(
+              type="text"
+              name="publisher"
+              required
+              value=(old && old.publisher ? old.publisher : '')
+              placeholder="e.g. FromSoftware"
+            )
+
+          //- Price Field
+          .form-group
+            label(for="price") Price
+            input#price(
+              type="number"
+              name="price"
+              step="0.01"
+              required
+              value=(old && old.price ? old.price : '')
+              placeholder="e.g. 59.99"
+            )
+
+          .form-actions
+            button.btn.btn-primary(type="submit") Add Game
+            a.btn.btn-ghost(href="/") Cancel
